@@ -33,7 +33,7 @@ app.get('/api/persons', (req, res) => {
 })
 
 app.get('/api/info', (req, res) => {
-    res.send("Phone book has info for " + persons.length + " people <br>" + new Date())
+    res.send("Phonebook has info for " + persons.length + " people <br>" + new Date())
   })
 
 const PORT = 3001
