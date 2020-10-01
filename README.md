@@ -1,1 +1,1 @@
-https://pacific-hollows-40720.herokuapp.com/api/persons
+https://pacific-hollows-40720.herokuapp.com/
