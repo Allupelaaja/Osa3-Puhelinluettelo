@@ -25,16 +25,26 @@ let persons = [
   ]
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+    res.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/persons', (req, res) => {
-  res.json(persons)
+    res.json(persons)
 })
 
 app.get('/api/info', (req, res) => {
     res.send("Phonebook has info for " + persons.length + " people <br>" + new Date())
-  })
+})
+
+app.get('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const person = persons.find(person => person.id === id)
+    if (!person) {
+        res.status(404).end()
+    } else {
+        res.json(person)
+    }
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
