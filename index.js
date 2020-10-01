@@ -1,10 +1,12 @@
 const express = require('express')
 var morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
 app.use(express.json())
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+app.use(cors())
 
 let persons = [
     { 
@@ -57,6 +59,38 @@ app.delete('/api/persons/:id', (req, res) => {
   
     res.status(204).end()
 })
+
+/*app.put('/api/persons/:id', (req, res) => {
+    const body = req.body
+    const id = Number(req.params.id)
+
+    console.log("meneekö")
+  
+    if (!body) {
+        return res.status(400).json({
+            error: 'content missing' 
+        })
+    } else if (!body.name) {
+        return res.status(400).json({
+            error: 'name missing' 
+        })
+    } else if (!body.number) {
+        return res.status(400).json({
+            error: 'number missing' 
+        })
+    } else if (persons.find(person => person.name === body.name)) {
+        return res.status(400).json({
+            error: 'name is not unique' 
+        })
+    }
+
+    const person = persons.find(person => person.id === id)
+    person.number = body.number
+
+    console.log(person)
+  
+    res.send("Number changed")
+})*/
   
 app.post('/api/persons', (req, res) => {
     const body = req.body
@@ -90,7 +124,7 @@ app.post('/api/persons', (req, res) => {
     res.json(person)
   })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+    console.log(`Server running on port ${PORT}`)
 })
