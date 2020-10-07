@@ -16,13 +16,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    Person.find({}).then(person => {
+    Person.find().then(person => {
         res.json(person)
       })
 })
 
 app.get('/api/info', (req, res) => {
-    Person.find({}).then(person => {
+    Person.find().then(person => {
         res.send("Phonebook has info for " + person.length + " people <br>" + new Date())
       })
     
@@ -68,7 +68,7 @@ app.post('/api/persons', (req, res) => {
     })
 
     person.save().then(savedPerson => {
-        response.json(savedPerson)
+        req.json(savedPerson)
       })
   })
 
